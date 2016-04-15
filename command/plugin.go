@@ -49,6 +49,7 @@ import (
 	shelllocalpostprocessor "github.com/mitchellh/packer/post-processor/shell-local"
 	shelllocalprovisioner "github.com/mitchellh/packer/provisioner/shell-local"
 	shellprovisioner "github.com/mitchellh/packer/provisioner/shell"
+	tritonbuilder "github.com/mitchellh/packer/builder/triton"
 	vagrantcloudpostprocessor "github.com/mitchellh/packer/post-processor/vagrant-cloud"
 	vagrantpostprocessor "github.com/mitchellh/packer/post-processor/vagrant"
 	virtualboxisobuilder "github.com/mitchellh/packer/builder/virtualbox/iso"
@@ -78,11 +79,20 @@ var Builders = map[string]packer.Builder{
 	"openstack":   new(openstackbuilder.Builder),
 	"parallels-iso":   new(parallelsisobuilder.Builder),
 	"parallels-pvm":   new(parallelspvmbuilder.Builder),
+<<<<<<< 683cb121dbf8a047f267977370552ca0a5423787
 	"qemu":   new(qemubuilder.Builder),
 	"virtualbox-iso":   new(virtualboxisobuilder.Builder),
 	"virtualbox-ovf":   new(virtualboxovfbuilder.Builder),
 	"vmware-iso":   new(vmwareisobuilder.Builder),
 	"vmware-vmx":   new(vmwarevmxbuilder.Builder),
+=======
+	"qemu":            new(qemubuilder.Builder),
+	"triton":          new(tritonbuilder.Builder),
+	"virtualbox-iso":  new(virtualboxisobuilder.Builder),
+	"virtualbox-ovf":  new(virtualboxovfbuilder.Builder),
+	"vmware-iso":      new(vmwareisobuilder.Builder),
+	"vmware-vmx":      new(vmwarevmxbuilder.Builder),
+>>>>>>> builder: add Triton builder
 }
 
 
