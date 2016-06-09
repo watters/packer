@@ -25,6 +25,7 @@ var requiredConfigValues = []string{
 	"location",
 	"os_type",
 	"storage_account",
+	"resource_group_name",
 	"subscription_id",
 	"tenant_id",
 }
@@ -162,6 +163,7 @@ func TestConfigInstantiatesCorrectAzureEnvironment(t *testing.T) {
 		"image_sku":              "ignore",
 		"location":               "ignore",
 		"storage_account":        "ignore",
+		"resource_group_name":    "ignore",
 		"subscription_id":        "ignore",
 		"os_type":                constants.Target_Linux,
 		"communicator":           "none",
@@ -192,7 +194,10 @@ func TestConfigInstantiatesCorrectAzureEnvironment(t *testing.T) {
 
 	for _, x := range table {
 		config["cloud_environment_name"] = x.name
-		c, _, _ := newConfig(config, packerConfiguration)
+		c, _, err := newConfig(config, packerConfiguration)
+		if err != nil {
+			t.Fatal(err)
+		}
 
 		if c.cloudEnvironment == nil || c.cloudEnvironment.Name != x.environmentName {
 			t.Errorf("Expected 'cloudEnvironment' to be set to '%s', but got '%s'.", x.environmentName, c.cloudEnvironment)
@@ -310,6 +315,7 @@ func TestUserDeviceLoginIsEnabledForLinux(t *testing.T) {
 		"image_sku":              "ignore",
 		"location":               "ignore",
 		"storage_account":        "ignore",
+		"resource_group_name":    "ignore",
 		"subscription_id":        "ignore",
 		"os_type":                constants.Target_Linux,
 		"communicator":           "none",
@@ -330,6 +336,7 @@ func TestUseDeviceLoginIsDisabledForWindows(t *testing.T) {
 		"image_sku":              "ignore",
 		"location":               "ignore",
 		"storage_account":        "ignore",
+		"resource_group_name":    "ignore",
 		"subscription_id":        "ignore",
 		"os_type":                constants.Target_Windows,
 		"communicator":           "none",
@@ -364,6 +371,7 @@ func TestConfigShouldRejectMalformedCaptureNamePrefix(t *testing.T) {
 		"image_sku":              "ignore",
 		"location":               "ignore",
 		"storage_account":        "ignore",
+		"resource_group_name":    "ignore",
 		"subscription_id":        "ignore",
 		// Does not matter for this test case, just pick one.
 		"os_type": constants.Target_Linux,
@@ -413,6 +421,7 @@ func TestConfigShouldRejectMalformedCaptureContainerName(t *testing.T) {
 		"image_sku":           "ignore",
 		"location":            "ignore",
 		"storage_account":     "ignore",
+		"resource_group_name": "ignore",
 		"subscription_id":     "ignore",
 		// Does not matter for this test case, just pick one.
 		"os_type": constants.Target_Linux,
