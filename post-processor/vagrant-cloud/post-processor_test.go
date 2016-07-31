@@ -2,8 +2,9 @@ package vagrantcloud
 
 import (
 	"bytes"
-	"github.com/mitchellh/packer/packer"
 	"testing"
+
+	"github.com/mitchellh/packer/packer"
 )
 
 func testGoodConfig() map[string]interface{} {
